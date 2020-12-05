@@ -1,12 +1,6 @@
 # truenas-upgrade-jails
 Upgrade all jails from prior release
 
-It will fetch the release matching the current truenas version.
-
-Then it will upgrade each jail with a status of 'up' to that version.
-
-If your jail is 'down' it will git can error msg and continue to the next jail in your system.
-
 ## Status
 
 This script has be tested to  work with FreeNAS 11.3 upgrading to TrueNAS CORE 12.2.
@@ -31,6 +25,7 @@ Download the repository to a convenient directory on your FreeNAS system by chan
 
 ## Run
 
+From the install directory run
 `./upgrade.sh`
 
 ## Options
