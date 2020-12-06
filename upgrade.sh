@@ -87,6 +87,7 @@ CURRENT_RELEASE=$(iocage get release ${jail} | cut -d - -f -1)"-RELEASE"
   elif [ $(iocage get -s ${jail} ) = "up" ]; then  
      print_msg "Will upgrade ${jail} from ${CURRENT_RELEASE} to ${RELEASE}"
         if ! [ $1 = "test" ]; then
+          iocage snapshot $jail -n "upgrade"
           iocage upgrade -r $RELEASE $jail
           iocage exec $jail "pkg-static upgrade -f -y"
           iocage restart $jail
