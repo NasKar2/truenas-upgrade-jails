@@ -13,7 +13,7 @@ Then it will upgrade each jail with a status of 'up' to that version.
 
 If your jail is 'down' it will git can error msg and continue to the next jail in your system.
 
-After you change the down jails to a status of up you can re run the scipt.
+After you change the down jails to a status of up you can re run the script.
 
 It will skip the jails that have already been upgraded and not fetch the current release if it has already done so.
 
@@ -26,7 +26,7 @@ Download the repository to a convenient directory on your FreeNAS system by chan
 ## Run
 
 From the install directory run
-`./upgrade.sh`
+`script upgrade.log ./upgrade.sh`
 
 ## Options
 
@@ -34,7 +34,7 @@ From the install directory run
 
 Run with the argument test will do a test run and not fetch the current release or upgrade the jails
 
-`./upgrade.sh test`
+`script upgrade.log ./upgrade.sh test`
 
 ### exclude jails
 
