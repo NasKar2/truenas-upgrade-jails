@@ -11,7 +11,7 @@ It will fetch the release matching the current truenas version.
 
 Then it will upgrade each jail with a status of 'up' to that version.
 
-If your jail is 'down' it will git can error msg and continue to the next jail in your system.
+If your jail is 'down' it will give an error msg and continue to the next jail in your system.
 
 After you change the down jails to a status of up you can re run the script.
 
