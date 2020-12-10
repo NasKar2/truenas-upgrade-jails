@@ -40,17 +40,18 @@ fi
 #
 # Fetch
 #
-CURRENT_RELEASE=$(ls -Art /mnt/v1/iocage/releases | tail -n 1)
-print_msg $CURRENT_RELEASE
+CURRENT_RELEASE=$(ls -Ar /mnt/v1/iocage/releases | head -n 1)
+#CURRENT_RELEASE=$(ls -Art /mnt/v1/iocage/releases | tail -n 1)
+print_msg "The most recent release available is ${CURRENT_RELEASE}"
 if [[ $# = 0 ]]; then
    if ! [ $CURRENT_RELEASE = $RELEASE ]; then
+     print_msg "Fetching release ${RELEASE}"
      iocage fetch -r $RELEASE
-     print_msg "fetch release"
    else
-     print_msg "do not fetch release"
+     print_msg "Release ${CURRENT_RELEASE} already exists"
    fi
 elif ! [[ $# = 0 ]] && ! [ $1 = "test" ]; then
-   print_err "argument passed only test is a valid argument"
+   print_err "Argument passed only test is a valid argument"
    exit 1
 else
    print_msg "Run in test mode"
@@ -88,11 +89,12 @@ CURRENT_RELEASE=$(iocage get release ${jail} | cut -d - -f -1)"-RELEASE"
      print_msg "Will upgrade ${jail} from ${CURRENT_RELEASE} to ${RELEASE}"
         if ! [ "$1" = "test" ]; then
           iocage upgrade -r $RELEASE $jail
+          iocage restart $jail
+          iocage exec $jail "pkg-static install -f -y pkg" # fix shared object 'libarchive.so.6' not found, required by 'pkg'
           iocage exec $jail "pkg-static upgrade -f -y"
           iocage restart $jail
         fi 
   fi
  fi
 done
-exit
 
