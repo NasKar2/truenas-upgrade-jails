@@ -17,6 +17,8 @@ After you change the down jails to a status of up you can re run the script.
 
 It will skip the jails that have already been upgraded and not fetch the current release if it has already done so.
 
+**Does not work properly with plugins, must be a standard iocage jail**
+
 ## Installation
 
 Download the repository to a convenient directory on your FreeNAS system by changing to that directory and running
