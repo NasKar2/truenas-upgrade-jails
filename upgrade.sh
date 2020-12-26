@@ -139,7 +139,7 @@ elif [ "$opt" = "Test Release Upgrade" ];then
       print_c "The most recent release available is ${CURRENT_RELEASE}"
       if ! [ $CURRENT_RELEASE = $RELEASE ]; then
         print_c "Fetching release ${RELEASE}"
-        iocage fetch -r $RELEASE
+        echo "iocage fetch -r $RELEASE"
 
       else
         print_c "Release ${CURRENT_RELEASE} already exists"
