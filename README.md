@@ -9,6 +9,8 @@ This script has be tested to  work with FreeNAS 11.3 upgrading to TrueNAS CORE 1
 
 You will get a menu with 4 options
 
+Output will be in Green if script is making a change, Yellow for information, Red if needs user input and Cyan if test mode.
+
 **Does not work properly with plugins, must be a standard iocage jail**
 
 ### Option 1
@@ -25,11 +27,13 @@ It will skip the jails that have already been upgraded and not fetch the current
 
 ### Option 2
 
-Update && Upgrade : Will upgrade the software in all jails with the pkg update && pkg upgrade command
+Update && Upgrade : Will upgrade the software in all jails with the `pkg update && pkg upgrade` command
 
 ### Option 3
 
-Test : Will run Option 1 in a test mode so you can see what it will do to your current iocage jails
+Test Release Upgrade : Will run Option 1 in a test mode so you can see what it will do to your current iocage jails
+
+Output will be in cyan to indicate test mode.
 
 ### Option 4
 
