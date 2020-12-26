@@ -11,10 +11,6 @@ You will get a menu with 4 options
 
 Output will be in Green if script is making a change, Yellow for information, Red if needs user input and Cyan if test mode.
 
-**You should Upgrade Jail Release (option 1) first if your jails are on an older release compared to the operating system.
-If not you will get a request for user input "Ignore the mismatch and continue? [y/N]: y"**
-
-
 **Does not work properly with plugins, must be a standard iocage jail**
 
 ### Option 1
@@ -29,9 +25,15 @@ After you change the down jails to a status of up you can re run the script.
 
 It will skip the jails that have already been upgraded and not fetch the current release if it has already done so.
 
+Option 2 will be run automatically after the jail release is upgraded
+
 ### Option 2
 
 Update && Upgrade : Will upgrade the software in all jails with the `pkg update && pkg upgrade` command
+
+Recommend to run Option 1 if the jail release version is behind the current operating system release.
+
+If you don't you will get a request for user input "Ignore the mismatch and continue? [y/N]: y"
 
 ### Option 3
 
