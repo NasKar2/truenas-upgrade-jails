@@ -78,7 +78,35 @@ for target in "${delete[@]}"; do
   done
 done
 echo "*******************"
+PS3='Please enter your choice: '
+options=("Upgrade Jail Release" "Update && Upgrade" "Test Release Upgrade" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Upgrade Jail Release")
+            echo "you chose choice $REPLY which is $opt"
+            break
+          # echo "you chose choice 1"
+            ;;
+        "Update && Upgrade")
+            echo "you chose choice $REPLY which is $opt"
+            break
+          # echo "you chose choice 2"
+            ;;
+        "Test Release Upgrade")
+            echo "you chose choice $REPLY which is $opt"
+            break
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+if [ $opt = "Upgrade Jail Release" ]; then
 for jail in "${array[@]}"; do
+   echo "execute $opt"
+   exit 1
 CURRENT_RELEASE=$(iocage get release ${jail} | cut -d - -f -1)"-RELEASE"
  if [  "$CURRENT_RELEASE" = "$RELEASE" ]; then
    print_err "The ${jail} is already upgraded to the current release ${RELEASE}" 
@@ -87,14 +115,33 @@ CURRENT_RELEASE=$(iocage get release ${jail} | cut -d - -f -1)"-RELEASE"
      print_err "The jail named ${jail} is down please start it if you want to upgrade it"
   elif [ $(iocage get -s ${jail} ) = "up" ]; then  
      print_msg "Will upgrade ${jail} from ${CURRENT_RELEASE} to ${RELEASE}"
-        if ! [ "$1" = "test" ]; then
           iocage upgrade -r $RELEASE $jail
           iocage restart $jail
           iocage exec $jail "pkg-static install -f -y pkg" # fix shared object 'libarchive.so.6' not found, required by 'pkg'
           iocage exec $jail "pkg-static upgrade -f -y"
           iocage restart $jail
-        fi 
   fi
  fi
 done
-
+elif [ $opt = "Update && Upgrade" ]; then
+for jail in "${array[@]}"; do
+   echo "execute $opt"
+done
+elif [ $opt = "Test Release Upgrade" ]; then
+for jail in "${array[@]}"; do
+   echo "execute $opt
+CURRENT_RELEASE=$(iocage get release ${jail} | cut -d - -f -1)"-RELEASE"
+ if [  "$CURRENT_RELEASE" = "$RELEASE" ]; then
+   print_err "The ${jail} is already upgraded to the current release ${RELEASE}"
+done
+ else
+  if [ $(iocage get -s ${jail} ) = "down" ]; then
+     print_err "The jail named ${jail} is down please start it if you want to upgrade it"
+  elif [ $(iocage get -s ${jail} ) = "up" ]; then
+     print_msg "Will upgrade ${jail} from ${CURRENT_RELEASE} to ${RELEASE}"
+  fi
+ fi
+done
+elif [ $opt = "Quit" ]; then
+echo "Quit"
+fi
