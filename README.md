@@ -11,6 +11,10 @@ You will get a menu with 4 options
 
 Output will be in Green if script is making a change, Yellow for information, Red if needs user input and Cyan if test mode.
 
+**You should Upgrade Jail Release (option 1) first if your jails are on an older release compared to the operating system.
+If not you will get a request for user input "Ignore the mismatch and continue? [y/N]: y"**
+
+
 **Does not work properly with plugins, must be a standard iocage jail**
 
 ### Option 1
